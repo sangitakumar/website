@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Check if user is logged in as admin (if needed)
+if (!isset($_SESSION['admin'])) {
+    header("Location: login.php"); // If not logged in, redirect to login page
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +37,7 @@
             <h2>Uploaded Images</h2>
             <div class="gallery">
                 <?php
-                // Display images from the uploads directory
+                // Fetch and display images from the 'uploads' folder
                 $images = glob("uploads/*.{jpg,png,jpeg,gif}", GLOB_BRACE);
                 foreach ($images as $image) {
                     echo "<div class='image'><img src='$image' alt='Uploaded Image'></div>";
@@ -38,3 +48,4 @@
     </div>
 </body>
 </html>
+
